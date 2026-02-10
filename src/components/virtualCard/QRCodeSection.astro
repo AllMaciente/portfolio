@@ -1,0 +1,78 @@
+---
+import { Share, Check } from "@lucide/astro";
+
+interface Props {
+  qrCodeSrc?: string;
+}
+
+const { qrCodeSrc = "/qrcode.png" } = Astro.props;
+---
+
+<section aria-label="Compartilhe este cartão" class="flex flex-col items-center gap-4">
+  <h2 class="text-xs font-mono uppercase tracking-widest text-text">
+    Escaneie para conectar
+  </h2>
+  
+  <div class="bg-black rounded-xl p-3">
+    <img 
+      src={qrCodeSrc} 
+      alt="Código QR desta página" 
+      width="120" 
+      height="120" 
+      class="rounded-sm"
+    />
+  </div>
+
+  <button
+    id="share-button"
+    type="button"
+    class="flex items-center gap-2 rounded-lg bg-bg-400 text-text px-5 py-2.5 text-sm font-medium hover:bg-indigo-500 transition-all active:scale-95"
+  >
+    <div id="share-icon-wrapper" class="flex items-center gap-2">
+        <Share class="w-4 h-4" />
+        <span>Compartilhar Cartão</span>
+    </div>
+    
+    <div id="copied-state" class="hidden items-center gap-2">
+        <Check class="w-4 h-4" />
+        <span>Link Copiado</span>
+    </div>
+  </button>
+</section>
+
+<script>
+  const button = document.getElementById('share-button');
+  const shareWrapper = document.getElementById('share-icon-wrapper');
+  const copiedState = document.getElementById('copied-state');
+
+  button?.addEventListener('click', async () => {
+    const url = window.location.href;
+    const shareData = {
+      title: "Allan Gama Maciente - Cartão Digital",
+      url: url,
+    };
+
+    try {
+      // Tenta usar a API de compartilhamento nativa
+      if (navigator.share && navigator.canShare?.(shareData)) {
+        await navigator.share(shareData);
+      } else {
+        throw new Error('Share not supported');
+      }
+    } catch (err) {
+      // Fallback para Clipboard
+      await navigator.clipboard.writeText(url);
+      
+      // Feedback visual (toggle de classes)
+      shareWrapper?.classList.add('hidden');
+      copiedState?.classList.remove('hidden');
+      copiedState?.classList.add('flex');
+
+      setTimeout(() => {
+        shareWrapper?.classList.remove('hidden');
+        copiedState?.classList.add('hidden');
+        copiedState?.classList.remove('flex');
+      }, 2000);
+    }
+  });
+</script>

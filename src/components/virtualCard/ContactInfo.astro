@@ -1,0 +1,54 @@
+---
+import { Mail, MapPin } from "@lucide/astro";
+
+const contactItems = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: "Allan@allmaciente.com.br",
+    href: "mailto:Allan@allmaciente.com.br",
+  },
+  {
+    icon: MapPin,
+    label: "Cidade",
+    value: "Joinville, SC",
+    href: "https://share.google/beUEZXGrAzYGxHiOI",
+  },
+];
+---
+
+<section aria-label="Informações de contato">
+  <h2 class="text-xs font-mono uppercase tracking-widest text-text mb-4">
+    Contato
+  </h2>
+  <div class="flex flex-col gap-3">
+    {
+      contactItems.map((item) => {
+        const Icon = item.icon;
+        const isExternal = item.href?.startsWith("http");
+        const Tag = item.href ? "a" : "div";
+
+        return (
+          <Tag
+            href={item.href}
+            class={`block rounded-lg p-2 -m-2 transition-colors group ${item.href ? "hover:bg-bg-700" : ""}`}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+          >
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-bg-700 flex items-center justify-center flex-shrink-0">
+                <Icon class="w-4 h-4 text-text group-hover:text-indigo-500 transition-colors" />
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs text-text group-hover:text-indigo-500 transition-colors">{item.label}</p>
+                <p class="text-sm text-indigo-500 truncate group-hover:text-text transition-colors">
+                  {item.value}
+                </p>
+              </div>
+            </div>
+          </Tag>
+        );
+      })
+    }
+  </div>
+</section>

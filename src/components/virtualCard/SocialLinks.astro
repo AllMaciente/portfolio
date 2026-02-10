@@ -1,0 +1,35 @@
+---
+import { Github, Linkedin } from "@lucide/astro";
+
+const socials = [
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/allmaciente/", handle: "in/allmaciente" },
+  { icon: Github, label: "GitHub", href: "https://github.com/AllMaciente", handle: "allmaciente" },
+];
+---
+
+<section aria-label="Links para redes sociais">
+  <h2 class="text-xs font-mono uppercase tracking-widest text-text mb-4">
+    Redes Sociais
+  </h2>
+  <div class="grid grid-cols-2 gap-2">
+    {
+      socials.map((social) => {
+        const Icon = social.icon;
+        return (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 rounded-lg bg-bg-700 p-3 hover:bg-text transition-colors group"
+          >
+            <Icon class="w-4 h-4 text-indigo-500 group-hover:text-bg-700 transition-colors" />
+            <div class="min-w-0">
+              <p class="text-[10px] leading-tight text-indigo-500 uppercase font-medium group-hover:text-bg-700 transition-colors">{social.label}</p>
+              <p class="text-sm text-text truncate font-medium group-hover:text-indigo-500 transition-colors">{social.handle}</p>
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+</section>
