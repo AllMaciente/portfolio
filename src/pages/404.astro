@@ -1,0 +1,20 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import AnimatedLink from "../components/AnimatedLink.astro";
+---
+
+<MainLayout>
+    <section id="404" class="flex flex-col justify-center items-center">
+        <h1 class="text-9xl">/404</h1>
+        <p class="text-2xl">error: not_found</p>
+        <AnimatedLink href="/" class="pt-4 text-indigo-500">
+            [ voltar para início ]
+        </AnimatedLink>
+    </section>
+</MainLayout>
+
+<style>
+    section {
+        min-height: calc(100vh - 200px);
+    }
+</style>
