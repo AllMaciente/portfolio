@@ -1,0 +1,19 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "AllMaciente" } = Astro.props;
+---
+
+<header class="sticky top-0 z-50 w-full p-4 border-b border-bg-100 bg-bg-500">
+  <nav class="mx-auto flex justify-between">
+    <a
+      href="/"
+      class="text-lg font-bold text-indigo-500 hover:opacity-80 transition-opacity"
+    >
+      {title}
+    </a>
+    <slot />
+  </nav>
+</header>
