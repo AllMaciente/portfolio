@@ -1,61 +1,77 @@
 ---
-import { Briefcase } from '@lucide/astro';
-import { Image } from "astro:assets";
-import Layout from "../layouts/Layout.astro";
-
-// Importando os componentes convertidos
+import BaseLayout from "../layouts/BaseLayout.astro";
 import GitHubAvatar from "../components/virtualCard/GitHubAvatar.astro";
 import ContactInfo from "../components/virtualCard/ContactInfo.astro";
 import SocialLinks from "../components/virtualCard/SocialLinks.astro";
 import QRCodeSection from "../components/virtualCard/QRCodeSection.astro";
+import Divider from "../components/Divider.astro";
 import oldPc from "../assets/oldPc.png";
+import { Image } from "astro:assets";
+import HighlightedText from "../components/HighlightedText.astro";
 ---
 
-<Layout >
-    <main class="min-h-screen flex items-center justify-center p-4 md:p-8 bg-bg-500">
+<BaseLayout>
+    <main
+        class="min-h-screen flex items-center justify-center p-4 md:p-8 bg-bg-500"
+    >
         <div class="w-full max-w-md">
-            <div class="rounded-2xl border border-bg-100 bg-bg-250 shadow-sm overflow-hidden">
-                
+            <div
+                class="rounded-2xl border border-bg-100 bg-bg-250 shadow-sm overflow-hidden"
+            >
                 <div class="relative h-40">
                     <Image
                         src={oldPc}
                         alt="Fundo de PC Antigo"
                         class="w-full h-full object-cover"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+                    >
+                    </div>
                 </div>
 
                 <div class="px-6 pb-6 -mt-12 relative">
                     <GitHubAvatar />
 
                     <div class="mt-4">
-                        <h1 class="text-2xl font-bold text-text text-balance">Allan Gama Maciente</h1>
-                        <p class="text-indigo-500 font-medium text-sm mt-0.5">Estudante de Programação</p>
-                        <!-- <div class="flex items-center gap-1.5 mt-1 text-slate-500">
-                            <Briefcase class="w-3.5 h-3.5" />
-                            <span class="text-sm">PlaceHolder</span>
-                        </div> -->
+                        <h1 class="text-2xl font-bold text-text text-balance">
+                            Allan Gama Maciente
+                        </h1>
+                        <p class="text-indigo-500 font-medium text-sm mt-0.5">
+                            Estudante de Programação
+                        </p>
                     </div>
 
                     <p class="mt-4 text-sm leading-relaxed text-text">
-                       Formado pelo programa Jovem Programador (Senac) e atualmente graduando em ADS pela Estácio. Apaixonado por transformar Problemas em linhas de código. 
-                       No meu tempo livre, gosto arremessar umas cestas para descontrair, sempre acompanhado de um bom rock — minha trilha sonora indispensável para o código e para a vida."
+                        <p class="md:max-w-2/3 pt-6">
+                            Formado pelo programa
+                            <HighlightedText>Jovem Programador</HighlightedText> (Senac)
+                            e atualmente graduando em <HighlightedText
+                                >ADS</HighlightedText
+                            > pela Estácio. Apaixonado por transformar <HighlightedText
+                                >problemas</HighlightedText
+                            > em
+                            <HighlightedText>código</HighlightedText>. No tempo
+                            livre, gosto de jogar <HighlightedText
+                                >basquete</HighlightedText
+                            >
+                            e ouvir <HighlightedText>rock</HighlightedText>.
+                        </p>
                     </p>
 
-                    <div class="my-6 border-t border-bg-100"></div>
+                    <Divider />
 
                     <ContactInfo />
 
-                    <div class="my-6 border-t border-bg-100"></div>
+                    <Divider />
 
                     <SocialLinks />
 
-                    <div class="my-6 border-t border-bg-100"></div>
+                    <Divider />
 
                     <QRCodeSection qrCodeSrc="/path-to-your-qr.png" />
-
                 </div>
             </div>
         </div>
     </main>
-</Layout>
+</BaseLayout>
