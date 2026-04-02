@@ -36,11 +36,13 @@ const contactItems = [
             rel={isExternal ? "noopener noreferrer" : undefined}
           >
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-lg bg-bg-700 flex items-center justify-center flex-shrink-0">
+              <div class="w-9 h-9 rounded-lg bg-bg-700 flex items-center justify-center shrink-0">
                 <Icon class="w-4 h-4 text-text group-hover:text-indigo-500 transition-colors" />
               </div>
               <div class="min-w-0">
-                <p class="text-xs text-text group-hover:text-indigo-500 transition-colors">{item.label}</p>
+                <p class="text-xs text-text group-hover:text-indigo-500 transition-colors">
+                  {item.label}
+                </p>
                 <p class="text-sm text-indigo-500 truncate group-hover:text-text transition-colors">
                   {item.value}
                 </p>
