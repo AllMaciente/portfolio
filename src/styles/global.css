@@ -17,5 +17,11 @@
   --color-bg-800: #101010;
   --color-bg-900: #111111;
   --color-text: #e9e8e4;
+
   --color-indigo-500: #57386f;
+  --color-indigo-750: #4c1c70;
+  --color-indigo-1000: #3f0070;
+
+  --color-blue-dev: #386a6f;
+  --color-orange-dev: #6f5238;
 }
