@@ -9,7 +9,9 @@ const { href, class: className = "", ...rest } = Astro.props;
 ---
 
 <a href={href} class={`relative group inline-block ${className}`} {...rest}>
-  <span class="relative inline-block after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:left-0 group-hover:after:w-full">
+  <span
+    class="relative inline-block after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:left-0 group-hover:after:w-full"
+  >
     <slot />
   </span>
 </a>
