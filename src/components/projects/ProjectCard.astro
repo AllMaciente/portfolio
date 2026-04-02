@@ -1,0 +1,309 @@
+---
+import AnimatedLink from "../AnimatedLink.astro";
+
+export interface Props {
+    title: string;
+    description: string;
+    longDescription?: string;
+    github?: string;
+    demo?: string;
+    tags?: string[];
+    status?: "concluído" | "em desenvolvimento" | "arquivado";
+    year?: string;
+    role?: string;
+    highlights?: string[];
+    images?: string[];
+    githubStats?: boolean;
+    index: number;
+}
+
+const {
+    title,
+    description,
+    longDescription,
+    github,
+    demo,
+    tags = [],
+    status,
+    year,
+    role,
+    highlights = [],
+    images = [],
+    githubStats = false,
+    index,
+} = Astro.props;
+
+const githubRepo = github
+    ? github.replace("https://github.com/", "").replace(/\/$/, "")
+    : null;
+
+const hasDetails =
+    longDescription ||
+    highlights.length > 0 ||
+    images.length > 0 ||
+    githubStats;
+
+const cardId = `project-${index}`;
+
+const statusColors: Record<string, string> = {
+    concluído: "indigo-500",
+    "em desenvolvimento": "blue-dev",
+    arquivado: "orange-dev",
+};
+const statusColor = status ? (statusColors[status] ?? "#555") : "#555";
+---
+
+<div
+    class="m-2 text-sm bg-bg-900 p-4 rounded-lg"
+    id={cardId}
+    data-github-repo={githubStats && githubRepo ? githubRepo : null}
+>
+    <div
+        class={`flex flex-row-reverse justify-between items-center mb-4 text-${statusColor}`}
+    >
+        <div class="text-xs">
+            {
+                demo && (
+                    <a
+                        href={demo}
+                        target="_blank"
+                        class="hover:text-text transition"
+                    >
+                        (demo)
+                    </a>
+                )
+            }
+            {
+                github && (
+                    <a
+                        href={github}
+                        target="_blank"
+                        class="hover:text-text transition"
+                    >
+                        ({githubRepo})
+                    </a>
+                )
+            }
+        </div>
+
+        <!-- Se tem detalhes, o título vira botão; senão é só h3 -->
+        {
+            hasDetails ? (
+                <button
+                    class={`text-xl text-left text-indigo-500 cursor-pointer hover:opacity-70 transition-opacity bg-transparent border-none p-0`}
+                    aria-expanded="false"
+                    aria-controls={`${cardId}-details`}
+                >
+                    [{title}]
+                </button>
+            ) : (
+                <h3 class="text-xl text-indigo-500">[{title}]</h3>
+            )
+        }
+    </div>
+
+    <p>{description}</p>
+
+    {
+        tags.length > 0 && (
+            <div class="card-tags">
+                {tags.map((tag, i) => (
+                    <span class="tag">
+                        {tag}
+                        {i < tags.length - 1 && " ·"}
+                    </span>
+                ))}
+            </div>
+        )
+    }
+
+    <!-- Detalhes — ocultos por padrão -->
+    {
+        hasDetails && (
+            <div id={`${cardId}-details`} hidden>
+                <div class="mt-4 flex flex-col gap-3 text-xs border-t border-white/5 pt-4">
+                    {longDescription && (
+                        <p class="text-text/60 leading-relaxed">
+                            {longDescription}
+                        </p>
+                    )}
+
+                    {images.length > 0 && (
+                        <div class="flex gap-2 overflow-x-auto pb-1">
+                            {images.map((src, i) => (
+                                <img
+                                    src={src}
+                                    alt={`${title} screenshot ${i + 1}`}
+                                    class="lightbox-trigger flex-shrink-0 w-64 h-36 object-cover rounded border border-white/10 cursor-zoom-in hover:opacity-80 transition-opacity"
+                                    loading="lazy"
+                                    data-src={src}
+                                    data-alt={`${title} screenshot ${i + 1}`}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {highlights.length > 0 && (
+                        <ul class="flex flex-col gap-1">
+                            {highlights.map((h) => (
+                                <li class="flex items-start gap-2 text-text/50">
+                                    <span class="mt-1.5 w-1 h-1 rounded-full bg-indigo-500 flex-shrink-0" />
+                                    {h}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
+                    {githubStats && githubRepo && (
+                        <div
+                            class="github-stats flex gap-4 flex-wrap"
+                            data-repo={githubRepo}
+                        >
+                            <span class="flex gap-1 text-text/30">
+                                ★ <span data-key="stars">—</span>
+                            </span>
+                            <span class="flex gap-1 text-text/30">
+                                fork <span data-key="forks">—</span>
+                            </span>
+                            <span class="flex gap-1 text-text/30">
+                                issues <span data-key="issues">—</span>
+                            </span>
+                            <span class="flex gap-1 text-text/30">
+                                <span data-key="language">—</span>
+                            </span>
+                        </div>
+                    )}
+
+                    {(year || role || status) && (
+                        <div class="flex gap-3 text-text/30">
+                            {year && <span>{year}</span>}
+                            {role && <span>· {role}</span>}
+                            {status && <span>· {status}</span>}
+                        </div>
+                    )}
+                </div>
+            </div>
+        )
+    }
+</div>
+
+<script>
+    // ── Lightbox ──────────────────────────────────────────────
+    // Cria o overlay uma única vez no DOM
+    if (!document.getElementById("lightbox")) {
+        const lb = document.createElement("div");
+        lb.id = "lightbox";
+        lb.innerHTML = `
+      <div id="lightbox-backdrop"></div>
+      <img id="lightbox-img" alt="" />
+    `;
+        document.body.appendChild(lb);
+
+        const style = document.createElement("style");
+        style.textContent = `
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+      #lightbox.open { display: flex; }
+      #lightbox-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(6px);
+        cursor: zoom-out;
+      }
+      #lightbox-img {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 6px;
+        box-shadow: 0 0 60px rgba(0,0,0,0.8);
+        animation: lb-in 0.18s ease;
+      }
+      @keyframes lb-in {
+        from { opacity: 0; transform: scale(0.96); }
+        to   { opacity: 1; transform: scale(1); }
+      }
+    `;
+        document.head.appendChild(style);
+
+        const close = () => lb.classList.remove("open");
+        document
+            .getElementById("lightbox-backdrop")!
+            .addEventListener("click", close);
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") close();
+        });
+    }
+
+    // Delega clique em qualquer .lightbox-trigger na página
+    document.addEventListener("click", (e) => {
+        const img = (e.target as HTMLElement).closest<HTMLImageElement>(
+            ".lightbox-trigger",
+        );
+        if (!img) return;
+        const lb = document.getElementById("lightbox")!;
+        const lbImg = document.getElementById(
+            "lightbox-img",
+        ) as HTMLImageElement;
+        lbImg.src = img.dataset.src ?? img.src;
+        lbImg.alt = img.dataset.alt ?? img.alt;
+        lb.classList.add("open");
+    });
+    // ─────────────────────────────────────────────────────────
+
+    document
+        .querySelectorAll<HTMLButtonElement>(
+            'button[aria-controls^="project-"]',
+        )
+        .forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const details = document.getElementById(
+                    btn.getAttribute("aria-controls")!,
+                );
+                if (!details) return;
+
+                const isOpen = btn.getAttribute("aria-expanded") === "true";
+
+                details.hidden = isOpen;
+                btn.setAttribute("aria-expanded", String(!isOpen));
+
+                // Busca GitHub stats só na primeira abertura
+                if (!isOpen) {
+                    const statsEl =
+                        details.querySelector<HTMLElement>(".github-stats");
+                    if (statsEl && !statsEl.dataset.loaded) {
+                        fetch(
+                            `https://api.github.com/repos/${statsEl.dataset.repo}`,
+                        )
+                            .then((r) => (r.ok ? r.json() : null))
+                            .then((data) => {
+                                if (!data) return;
+                                const set = (
+                                    key: string,
+                                    val: string | number,
+                                ) => {
+                                    const el =
+                                        statsEl.querySelector<HTMLElement>(
+                                            `[data-key="${key}"]`,
+                                        );
+                                    if (el) el.textContent = String(val ?? "—");
+                                };
+                                set("stars", data.stargazers_count);
+                                set("forks", data.forks_count);
+                                set("issues", data.open_issues_count);
+                                set("language", data.language);
+                                statsEl.dataset.loaded = "true";
+                            })
+                            .catch(() => {});
+                    }
+                }
+            });
+        });
+</script>

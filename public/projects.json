@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Portfolio Site",
+        "description": "Site de portfólio construído com Astro e Tailwind CSS. Foco em performance e design minimalista.",
+        "longDescription": "O projeto nasceu da necessidade de ter um espaço próprio na web que refletisse minha forma de pensar sobre design e código. Optei pelo Astro por permitir zero JS por padrão, e Tailwind pela velocidade de iteração no CSS.",
+        "tags": [
+            "astro",
+            "tailwind"
+        ],
+        "year": "2026",
+        "role": "solo",
+        "highlights": [
+            "Deploy automático via GitHub Actions"
+        ],
+        "githubStats": false
+    },
+    {
+        "title": "SpotHub",
+        "description": "API backend para sistema de reserva de salas de reunião",
+        "longDescription": "Desenvolvimento de uma API RESTful utilizando NestJS com PostgreSQL e Prisma ORM. Inclui autenticação JWT, autorização baseada em roles (ADMIN, GESTOR, USER), validação de reservas com prevenção de conflitos de horário, e documentação Swagger/OpenAPI.",
+        "github": "https://github.com/AllMaciente/SpotHub",
+        "tags": [
+            "NestJS",
+            "PostgreSQL",
+            "Prisma",
+            "TypeScript",
+            "JWT"
+        ],
+        "status": "em desenvolvimento",
+        "year": "2025",
+        "role": "solo",
+        "highlights": [
+            "Autenticação JWT com roles",
+            "Validação de conflitos de reserva",
+            "Sistema de paginação",
+            "Documentação Swagger"
+        ]
+    }
+]
