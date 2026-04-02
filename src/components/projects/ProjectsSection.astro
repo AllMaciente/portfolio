@@ -17,10 +17,9 @@ export interface Project {
     githubStats?: boolean;
 }
 
-// Fetch em build time — arquivo em public/projects.json
-const projects: Project[] = await fetch(
-    new URL("/projects.json", Astro.url),
-).then((r) => r.json());
+import projectsJson from "../../../public/projects.json";
+
+const projects: Project[] = projectsJson as Project[];
 ---
 
 <section
