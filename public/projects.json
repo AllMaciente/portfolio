@@ -26,7 +26,6 @@
             "TypeScript",
             "JWT"
         ],
-        "status": "em desenvolvimento",
         "year": "2025",
         "role": "solo",
         "highlights": [
@@ -34,6 +33,7 @@
             "Validação de conflitos de reserva",
             "Sistema de paginação",
             "Documentação Swagger"
-        ]
+        ],
+        "githubStats": true
     }
 ]
