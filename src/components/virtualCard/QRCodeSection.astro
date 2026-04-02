@@ -1,7 +1,7 @@
 ---
 import { Share, Check } from "@lucide/astro";
 
-const currentUrl = Astro.url.origin;
+const currentUrl = Astro.site?.origin || "https://allmaciente.com";
 const qrCodeSrc = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(currentUrl)}`;
 ---
 
