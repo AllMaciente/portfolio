@@ -1,11 +1,8 @@
 ---
 import { Share, Check } from "@lucide/astro";
 
-interface Props {
-  qrCodeSrc?: string;
-}
-
-const { qrCodeSrc = "/qrcode.png" } = Astro.props;
+const currentUrl = Astro.url.origin;
+const qrCodeSrc = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(currentUrl)}`;
 ---
 
 <section aria-label="Compartilhe este cartão" class="flex flex-col items-center gap-4">
