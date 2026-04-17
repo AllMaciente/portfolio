@@ -2,9 +2,11 @@
 @import "tailwindcss";
 
 @theme {
+  /* ─── Fontes ─── */
   --font-jetbrains-mono: "JetBrains Mono", monospace;
   --font-poppins: "Poppins";
 
+  /* ─── background ─── */
   --color-bg-100: #2f2f2f;
   --color-bg-150: #2c2c2c;
   --color-bg-200: #2b2b2b;
@@ -18,12 +20,49 @@
   --color-bg-800: #101010;
   --color-bg-900: #111111;
 
-  --color-text: #e9e8e4;
-
+  /* ─── Indigo — variações da cor de destaque ─── */
+  --color-indigo-100: #e8d9f5;
+  --color-indigo-200: #c9a8e0;
+  --color-indigo-300: #a075c9;
+  --color-indigo-400: #7a4da0;
   --color-indigo-500: #57386f;
   --color-indigo-750: #4c1c70;
+  --color-indigo-600: #4c2d62;
+  --color-indigo-900: #300c50;
   --color-indigo-1000: #3f0070;
 
+  /* ─── Texto — hierarquia ─── */
+  --color-text: #e9e8e4;
+  --color-text-muted: #a09f9b;
+  --color-text-subtle: #6b6a67;
+  --color-text-disabled: #3d3d3b;
+  --color-text-inverse: #0f0f0f;
+
+  /* ─── Blue-dev — variações ─── */
   --color-blue-dev: #386a6f;
+  --color-blue-dev-light: #5ab3bb;
+  --color-blue-dev-dark: #224247;
+  --color-blue-dev-muted: #1e3538;
+
+  /* ─── Orange-dev — variações ─── */
   --color-orange-dev: #6f5238;
+  --color-orange-dev-light: #b58a62;
+  --color-orange-dev-dark: #3e2e1d;
+  --color-orange-dev-muted: #2a1f12;
+
+  /* ─── Semânticas UX ─── */
+  --color-success: #2e6b4f;
+  --color-success-subtle: #1a3d2d;
+  --color-warning: #7a5c1e;
+  --color-warning-subtle: #3d2e0f;
+  --color-danger: #7a2e2e;
+  --color-danger-subtle: #3d1717;
+  --color-info: #2e4e7a;
+  --color-info-subtle: #172638;
+
+  /* ─── Bordas / Divisores ─── */
+  --color-border-subtle: #282828;
+  --color-border-default: #333333;
+  --color-border-strong: #444444;
+  --color-border-accent: #57386f;
 }
