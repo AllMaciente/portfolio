@@ -2,8 +2,18 @@
 import { Github, Linkedin } from "@lucide/astro";
 
 const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/allmaciente/", handle: "in/allmaciente" },
-  { icon: Github, label: "GitHub", href: "https://github.com/AllMaciente", handle: "allmaciente" },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/allmaciente/",
+    handle: "in/allmaciente",
+  },
+  {
+    icon: Github,
+    label: "GitHub",
+    href: "https://github.com/AllMaciente",
+    handle: "allmaciente",
+  },
 ];
 ---
 
@@ -24,8 +34,12 @@ const socials = [
           >
             <Icon class="w-4 h-4 text-indigo-500 group-hover:text-bg-700 transition-colors" />
             <div class="min-w-0">
-              <p class="text-[10px] leading-tight text-indigo-500 uppercase font-medium group-hover:text-bg-700 transition-colors">{social.label}</p>
-              <p class="text-sm text-text truncate font-medium group-hover:text-indigo-500 transition-colors">{social.handle}</p>
+              <p class="text-[10px] leading-tight text-indigo-500 uppercase font-medium group-hover:text-bg-700 transition-colors">
+                {social.label}
+              </p>
+              <p class="text-sm text-text truncate font-medium group-hover:text-indigo-500 transition-colors">
+                {social.handle}
+              </p>
             </div>
           </a>
         );
