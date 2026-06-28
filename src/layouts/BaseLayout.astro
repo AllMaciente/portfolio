@@ -1,11 +1,17 @@
 ---
-import '../styles/global.css'
+import "../styles/global.css";
+import { SEO } from "astro-seo";
 interface Props {
 	title?: string;
+	image?: string;
 }
 
-const { title = "AllMaciente" } = Astro.props;
+const {
+	title = "AllMaciente",
+	image = "https://allmaciente.dev.br/oldPc.webp",
+} = Astro.props;
 ---
+
 <!doctype html>
 <html lang="pt-br">
 	<head>
@@ -14,9 +20,25 @@ const { title = "AllMaciente" } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<SEO
+			title={title}
+			titleTemplate="%s | Allmaciente"
+			titleDefault="Allmaciente"
+			canonical={Astro.url.href}
+			openGraph={{
+				basic: {
+					title: title,
+					type: "website",
+					image: image,
+					url: Astro.url.href,
+				},
+				image: {
+					alt: "Capa representativa da página",
+				},
+			}}
+		/>
 	</head>
-	<body class="bg-bg-500 text-text font-jetbrains-mono ">
+	<body class="bg-bg-500 text-text font-jetbrains-mono">
 		<slot />
 	</body>
 </html>
