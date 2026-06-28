@@ -5,8 +5,6 @@ import ContactInfo from "../components/virtualCard/ContactInfo.astro";
 import SocialLinks from "../components/virtualCard/SocialLinks.astro";
 import QRCodeSection from "../components/virtualCard/QRCodeSection.astro";
 import Divider from "../components/Divider.astro";
-import oldPc from "../assets/oldPc.png";
-import { Image } from "astro:assets";
 import HighlightedText from "../components/HighlightedText.astro";
 ---
 
@@ -19,8 +17,8 @@ import HighlightedText from "../components/HighlightedText.astro";
                 class="rounded-2xl border border-bg-100 bg-bg-250 shadow-sm overflow-hidden"
             >
                 <div class="relative h-40">
-                    <Image
-                        src={oldPc}
+                    <img
+                        src="/oldPc.webp"
                         alt="Fundo de PC Antigo"
                         class="w-full h-full object-cover"
                     />
