@@ -34,6 +34,7 @@
             "Sistema de paginação",
             "Documentação Swagger"
         ],
-        "githubStats": true
+        "githubStats": true,
+        "status": "em desenvolvimento"
     }
 ]
