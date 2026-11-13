@@ -36,5 +36,30 @@
         ],
         "githubStats": true,
         "status": "em desenvolvimento"
+    },
+    {
+        "title": "Huectl",
+        "description": "Gerenciador de temas para Linux escrito em Rust, com template engine e gerenciamento de wallpapers.",
+        "longDescription": "Um gerenciador de temas modular inspirado no pywal, mas sem extração de cores a partir de imagens: você define as cores e tem controle total sobre elas. Construído em Rust como um binário único e sem dependências de runtime, aplica temas em JSON ou TOML, renderiza templates de configuração (waybar, alacritty, dunst) via placeholders como {{color4}}, gerencia wallpapers por nome de tema e executa hooks pós-apply. Segue a XDG Base Directory Specification, com cache em JSON consumível por scripts externos. Desenvolvido em parceria com agentes de IA, com arquitetura, escopo e revisão conduzidos por mim.",
+        "github": "https://github.com/AllMaciente/Huectl",
+        "tags": [
+            "rust",
+            "cli",
+            "linux",
+            "ricing",
+            "freedesktop"
+        ],
+        "year": "2026",
+        "role": "solo",
+        "highlights": [
+            "Paleta de 19 cores com validação de hex",
+            "Template engine com placeholders dinâmicos",
+            "Wallpapers com suporte a múltiplos setters",
+            "Hooks pós-apply com variáveis de ambiente",
+            "Binário estático sem dependências de runtime",
+            "Código escrito com agentes de IA sob minha direção"
+        ],
+        "githubStats": true,
+        "status": "em desenvolvimento"
     }
 ]
